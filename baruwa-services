@@ -1,0 +1,184 @@
+# Restart Services Console
+
+
+function clamdrestart () {
+clear 2>/dev/null
+service clamd restart
+echo " "
+echo "Completed!!!"
+sleep 3
+}
+function eximrestart () {
+clear 2>/dev/null
+service exim restart
+echo " "
+echo "Completed!!!"
+sleep 3
+}
+function httpdrestart () {
+clear 2>/dev/null
+service httpd restart
+echo " "
+echo "Completed!!!"
+sleep 3
+}
+function memcacherestart () {
+clear 2>/dev/null
+service memcached restart
+echo " "
+echo "Completed!!!"
+sleep 3
+}
+function postgresqlrestart () {
+clear 2>/dev/null
+service postgresql restart
+echo " "
+echo "Completed!!!"
+sleep 3
+}
+function rabbitmqserverrestart () {
+clear 2>/dev/null
+service rabbitmq-server restart
+echo " "
+echo "Completed!!!"
+sleep 3
+}
+function searchdrestart () {
+clear 2>/dev/null
+service searchd restart
+echo " "
+echo "Completed!!!"
+sleep 3
+}
+function baruwarestart () {
+clear 2>/dev/null
+service baruwa restart
+echo " "
+echo "Completed!!!"
+sleep 3
+}
+function crondrestart () {
+clear 2>/dev/null
+service crond restart
+echo " "
+echo "Completed!!!"
+sleep 3
+}
+function MailScannerrestart () {
+clear 2>/dev/null
+service MailScanner restart
+echo " "
+echo "Completed!!!"
+sleep 3
+}
+function spamassassinrestart () {
+clear 2>/dev/null
+service spamassassin restart
+echo " "
+echo "Completed!!!"
+sleep 3
+}
+function namedrestart () {
+clear 2>/dev/null
+service named restart
+echo " "
+echo "Completed!!!"
+sleep 3
+}
+function restart_allservices () {
+clear 2>/dev/null
+service clamd restart
+service exim restart
+service httpd restart
+service memcached restart
+service postgresql restart
+service rabbitmq-server restart
+service searchd restart
+service baruwa restart
+service crond restart
+service MailScanner restart
+service spamassassin restart
+service named restart
+sleep 5
+} 
+
+
+# +---------------------------------------------------+
+# Restart Services Console
+# +---------------------------------------------------+
+
+menu_services() {
+	clear
+	echo "------------------------------"
+	echo "Restart Services"
+	echo "------------------------------"
+	echo ""
+	echo "Please make a choice:"
+	echo ""
+	echo "1) clamd - Runs the AntiVirus"
+	echo "2) exim - Runs the Mail Queues"
+	echo "3) httpd - Runs the Web Server"
+	echo "4) memcached"
+	echo "5) postgresql - Runs the SQL database"
+	echo "6) rabbitmq-server"
+	echo "7) searchd"
+	echo "8) baruwa - Runs baruwa"
+	echo "9) crond - Runs the Scheduled Tasks"
+	echo "10) MailScanner - Runs MailScanner"
+	echo "11) spamassassin - Runs SpamAssassin"
+	echo "12) named - Runs the Local DNS Server used for sending mail"
+	echo "all) Restart All Services (in above order)"
+	echo "rebootserver) Reboots the whole Server"
+
+	echo " "
+	echo "Type 'x' to Return to Main Menu"
+}
+
+# +---------------------------------------------------+
+# Service Choices
+# +---------------------------------------------------+
+
+read_services() {
+	local choiceserv
+	read -p "Enter Choice: " choiceserv
+	case $choiceserv in
+		1) clamdrestart ;;
+		2) eximrestart ;;
+		3) httpdrestart ;;
+		4) memcachedrestart ;;
+		5) postgresqlrestart ;;
+		6) rabbitmqserverrestart ;;
+		7) searchdrestart ;;
+		8) baruwarestart ;;
+		9) crondrestart ;;
+		10) MailScannerrestart ;;
+		11) spamassassinrestart ;;
+		12) namedrestart ;;
+		all) restart_allservices ;;
+		rebootserver) reboot ;;
+		x) exit 0 ;;
+		*) echo -e "Error \"$choiceserv\" is not an option..." && sleep 2
+	esac
+}
+
+
+
+# +---------------------------------------------------+
+# Be sure we're root
+# +---------------------------------------------------+
+
+if [ `whoami` == root ]
+	then
+		menu2="1"
+		while [ $menu2 == "1" ]
+		do
+			menu_services
+			read_services
+		done
+	else
+		echo "Sorry, but you are not root."
+		echo "Please su - then try again."
+		exit 0
+	fi
+# +---------------------------------------------------+
+
