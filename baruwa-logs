@@ -1,0 +1,197 @@
+
+# Search Mail Log
+function eximmain () {
+clear 2>/dev/null
+echo "------------------------------------------------------------------------------";
+echo "Search Mail Logs";
+echo "------------------------------------------------------------------------------";
+echo ""; 
+
+	local search
+	read -p "Search for what in maillog: " search
+	echo ""; 
+case $search in
+quit) exit 0 ;;
+*) tail -n 10000 /var/log/exim/main.log | grep $search
+esac
+
+ 	sleep 0
+echo "Completed!!!";
+read -p "Press [Enter] to exit to menu..."
+}
+
+
+
+
+# View Baruwa Log
+function maillog () {
+clear 2>/dev/null
+echo "------------------------------------------------------------------------------";
+echo "Tail /var/log/maillog";
+echo "------------------------------------------------------------------------------";
+echo ""; 
+
+tail -n 1000 /var/log/maillog
+
+ 	sleep 2
+echo "Completed!!!";
+read -p "Press [Enter] to exit to menu..."
+}
+
+
+
+# View AV Log
+function clamdlog () {
+clear 2>/dev/null
+echo "------------------------------------------------------------------------------";
+echo "Tail /var/log/clamd/clamd.log";
+echo "------------------------------------------------------------------------------";
+echo ""; 
+
+tail -n 1000 /var/log/clamav/clamd.log
+
+ 	sleep 2
+echo "Completed!!!";
+read -p "Press [Enter] to exit to menu..."
+}
+
+
+# View AV Update Log
+function freshclamlog () {
+clear 2>/dev/null
+echo "------------------------------------------------------------------------------";
+echo "Tail /var/log/clamd/freshclam.log";
+echo "------------------------------------------------------------------------------";
+echo ""; 
+
+tail -n 1000 /var/log/clamav/freshclam.log
+
+ 	sleep 2
+echo "Completed!!!";
+read -p "Press [Enter] to exit to menu..."
+}
+
+
+
+# View httpd errors Log
+function httpdbaruwaerror () {
+clear 2>/dev/null
+echo "------------------------------------------------------------------------------";
+echo "Tail /var/log/httpd/baruwa-error_log";
+echo "------------------------------------------------------------------------------";
+echo ""; 
+
+tail -n 1000 /var/log/httpd/baruwa-error_log
+
+ 	sleep 2
+echo "Completed!!!";
+read -p "Press [Enter] to exit to menu..."
+}
+
+
+# View Drive Space
+function drivespace () {
+clear 2>/dev/null
+echo "------------------------------------------------------------------------------";
+echo "View Drive Space";
+echo "------------------------------------------------------------------------------";
+echo ""; 
+
+df -h
+
+ 	sleep 1
+echo " "
+echo "Completed!!!";
+read -p "Press [Enter] to exit to menu..."
+}
+
+
+# View Folder Size
+function foldersize () {
+clear 2>/dev/null
+echo "------------------------------------------------------------------------------";
+echo "Browse Folder Sizes";
+echo "------------------------------------------------------------------------------";
+echo " "; 
+
+ncdu /
+
+ 	sleep 1
+echo " "
+echo "Completed!!!";
+sleep 1
+}
+
+
+
+# +---------------------------------------------------+
+# Display menus
+# +---------------------------------------------------+
+
+menu_main() {
+	clear
+	echo "------------------------------"
+	echo "Baruwa Log Search"
+	echo "------------------------------"
+	echo ""
+	echo "Please make a choice:"
+	echo ""
+	echo "a) Search last 10,000 MailLogs"
+	echo "b) Veiw MailScanner Logfile (Last 1,000 records)"
+	echo "c) Veiw AV Logfile (Last 1,000 records)"
+	echo "d) Veiw AV Updater Logfile (Last 1,000 records)"
+	echo "e) Veiw HttpError Logfile (Last 1,000 records)"
+	echo "f) View Avalible Drive Space"
+	echo "g) Browse Folder Sizes"
+
+
+	#echo "f) Update SpamAssassin Rules"
+	#echo "g) Update Search Index"
+	#echo "h) Clean Quarantine"
+	#echo "i) Clean Database"
+	#echo ""
+	#echo "w) Run Incomming Mail Queue"
+	#echo "x) Run Outgoing Mail Queue"
+	#echo "y) Update Queue Stats"
+	echo " "
+	echo "Type 'x' to Return to Main Menu"
+}
+
+# +---------------------------------------------------+
+# Choices
+# +---------------------------------------------------+
+
+read_main() {
+	local choice
+	read -p "Enter Choice: " choice
+	case $choice in
+		a) eximmain ;;
+		b) maillog ;;
+		c) clamdlog ;;
+		d) freshclamlog ;;
+		e) httpdbaruwaerror ;;
+		f) drivespace ;;
+		g) foldersize ;;
+		x) exit 0 ;;
+		*) echo -e "Error \"$choice\" is not an option..." && sleep 2
+	esac
+}
+
+# +---------------------------------------------------+
+# Be sure we're root
+# +---------------------------------------------------+
+
+if [ `whoami` == root ]
+	then
+		menu="1"
+		while [ $menu == "1" ]
+		do
+			menu_main
+			read_main
+		done
+	else
+		echo "Sorry, but you are not root."
+		echo "Please su - then try again."
+		exit 0
+	fi
+# +---------------------------------------------------+
