@@ -146,8 +146,13 @@ echo "Browse Folder Sizes";
 echo "------------------------------------------------------------------------------";
 echo " "; 
 
-ncdu /
 
+if rpm -qa | grep ncdu;
+then
+ncdu /
+else
+yum install ncdu -y
+fi
  	sleep 1
 echo " "
 echo "Completed!!!";
