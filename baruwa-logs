@@ -152,6 +152,7 @@ then
 ncdu /
 else
 yum install ncdu -y
+ncdu /
 fi
  	sleep 1
 echo " "
