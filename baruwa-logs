@@ -175,16 +175,6 @@ menu_main() {
 	echo "e) Veiw HttpError Logfile (Last 1,000 records)"
 	echo "f) View Avalible Drive Space"
 	echo "g) Browse Folder Sizes"
-
-
-	#echo "f) Update SpamAssassin Rules"
-	#echo "g) Update Search Index"
-	#echo "h) Clean Quarantine"
-	#echo "i) Clean Database"
-	#echo ""
-	#echo "w) Run Incomming Mail Queue"
-	#echo "x) Run Outgoing Mail Queue"
-	#echo "y) Update Queue Stats"
 	echo " "
 	echo "Type 'x' to Return to Main Menu"
 }
