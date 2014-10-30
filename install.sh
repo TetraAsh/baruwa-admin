@@ -1,8 +1,7 @@
-To Install on CentOS 6.5 after running the baruwa-install.com install script.
+# To Install on CentOS 6.5 after running the baruwa-install.com install script.
 
 
 cd /usr/sbin
-mv baruwa-admin baruwa-admin.orig
 curl -O https://raw.githubusercontent.com/tetraash/baruwa-admin/master/baruwa-admin
 curl -O https://raw.githubusercontent.com/tetraash/baruwa-admin/master/baruwa-logs
 curl -O https://raw.githubusercontent.com/tetraash/baruwa-admin/master/baruwa-services
