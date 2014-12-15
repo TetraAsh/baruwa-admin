@@ -334,7 +334,7 @@ sleep 3
 # Restart PostGreSQL Service
 function postgresqlrestart () {
 clear 2>/dev/null
-service postgresql restart
+/etc/init.d/postgresql restart
 echo " "
 echo "Completed!!!"
 sleep 3
