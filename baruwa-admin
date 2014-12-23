@@ -306,6 +306,7 @@ service clamd restart
 echo " "
 echo "Completed!!!"
 sleep 3
+read -p "Press [Enter] to exit to menu..."
 }
 # Restart Exim Service
 function eximrestart () {
@@ -314,6 +315,7 @@ service exim restart
 echo " "
 echo "Completed!!!"
 sleep 3
+read -p "Press [Enter] to exit to menu..."
 }
 # Restart Apache Service
 function httpdrestart () {
@@ -322,6 +324,7 @@ service httpd restart
 echo " "
 echo "Completed!!!"
 sleep 3
+read -p "Press [Enter] to exit to menu..."
 }
 # Restart MemCache Service
 function memcacherestart () {
@@ -338,6 +341,7 @@ clear 2>/dev/null
 echo " "
 echo "Completed!!!"
 sleep 3
+read -p "Press [Enter] to exit to menu..."
 }
 # Restart RabbitMQ Service
 function rabbitmqserverrestart () {
@@ -362,6 +366,7 @@ service baruwa restart
 echo " "
 echo "Completed!!!"
 sleep 3
+read -p "Press [Enter] to exit to menu..."
 }
 # Restart Cron Service
 function crondrestart () {
@@ -378,6 +383,7 @@ service MailScanner restart
 echo " "
 echo "Completed!!!"
 sleep 3
+read -p "Press [Enter] to exit to menu..."
 }
 # Restart SpamAssassin Service
 function spamassassinrestart () {
@@ -411,6 +417,7 @@ service MailScanner restart
 service spamassassin restart
 service named restart
 sleep 5
+read -p "Press [Enter] to exit to menu..."
 }
 function toggledebug() {
 if cat /etc/MailScanner/MailScanner.conf | grep -i "Debug = no"
