@@ -198,7 +198,6 @@ read -p "Search for what in maillog: " search
 echo "";
 case $search in
 quit) exit 0 ;;
-echo "Searching Incomming MailLog";
 *) tail -n 100000 /var/log/exim/main.log | grep $search
 esac
 sleep 0
@@ -219,7 +218,6 @@ read -p "Search for what in Baruwa Log: " search
 echo "";
 case $search in
 quit) exit 0 ;;
-echo "Searching BaruwaLog";
 *) tail -n 100000 /var/log/maillog | grep $search
 esac
 sleep 2
