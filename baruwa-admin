@@ -189,7 +189,7 @@ sleep 2
 function eximmain () {
 clear 2>/dev/null
 echo "------------------------------------------------------------------------------";
-echo "Search Last 10,000 Records In Exim Logs";
+echo "Search Last 100,000 Records In Exim Logs";
 echo "/var/log/exim/main.log";
 echo "------------------------------------------------------------------------------";
 echo "";
@@ -198,18 +198,40 @@ read -p "Search for what in maillog: " search
 echo "";
 case $search in
 quit) exit 0 ;;
-*) tail -n 10000 /var/log/exim/main.log | grep $search
+echo "Searching Incomming MailLog";
+*) tail -n 100000 /var/log/exim/main.log | grep $search
 esac
 sleep 0
 echo "Completed!!!";
 read -p "Press [Enter] to exit to menu..."
 }
 
-# View Baruwa Log
+# Search Baruwa Log
 function maillog () {
 clear 2>/dev/null
 echo "------------------------------------------------------------------------------";
-echo "Search Last 10,000 Records In Baruwa Log";
+echo "Search Last 100,000 Records In Baruwa Log";
+echo "/var/log/maillog";
+echo "------------------------------------------------------------------------------";
+echo "";
+local search
+read -p "Search for what in Baruwa Log: " search
+echo "";
+case $search in
+quit) exit 0 ;;
+echo "Searching BaruwaLog";
+*) tail -n 100000 /var/log/maillog | grep $search
+esac
+sleep 2
+echo "Completed!!!";
+read -p "Press [Enter] to exit to menu..."
+}
+
+# Tail Baruwa Log
+function tailmaillog () {
+clear 2>/dev/null
+echo "------------------------------------------------------------------------------";
+echo "View Last 10,000 Records In Baruwa Log";
 echo "Tail /var/log/maillog";
 echo "------------------------------------------------------------------------------";
 echo "";
@@ -218,6 +240,7 @@ sleep 2
 echo "Completed!!!";
 read -p "Press [Enter] to exit to menu..."
 }
+
 
 # View AV Log
 function clamdlog () {
@@ -499,13 +522,14 @@ echo "------------------------------"
 echo ""
 echo "Please make a choice:"
 echo ""
-echo "a) Search last 10,000 MailLogs (exim)"
-echo "b) View MailScanner Log File (Last 1,000 records)"
-echo "c) View AV Log File (Last 1,000 records)"
-echo "d) View AV Updater Log File (Last 1,000 records)"
-echo "e) View HttpError Log File (Last 1,000 records)"
-echo "f) View Available Drive Space"
-echo "g) Browse Folder Sizes"
+echo "a) Search last 100,000 MailLogs (exim)"
+echo "b) Search last 100,000 Baruwa Logs"
+echo "c) Tail baruwa log"
+echo "d) View AV Log File (Last 1,000 records)"
+echo "e) View AV Updater Log File (Last 1,000 records)"
+echo "f) View HttpError Log File (Last 1,000 records)"
+echo "g) View Available Drive Space"
+echo "h) Browse Folder Sizes"
 echo "z) Toggle Debug Mode On/Off"
 echo " "
 echo "Type 'x' to Return to Main Menu"
@@ -566,11 +590,12 @@ read -p "Enter Choice: " choice
 case $choice in
 a) eximmain ;;
 b) maillog ;;
-c) clamdlog ;;
-d) freshclamlog ;;
-e) httpdbaruwaerror ;;
-f) drivespace ;;
-g) foldersize ;;
+c) tailmaillog ;;
+d) clamdlog ;;
+e) freshclamlog ;;
+f) httpdbaruwaerror ;;
+g) drivespace ;;
+h) foldersize ;;
 z) toggledebug ;;
 x) menu_main ;;
 *) echo -e "Error \"$choice\" is not an option..." && sleep 2
