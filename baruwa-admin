@@ -445,7 +445,7 @@ if cat /etc/MailScanner/MailScanner.conf | grep -i "Debug = no"
 then
 clear
 echo "------------------------------------------------------------------------------";
-echo "Toggle Dubug ON";
+echo "Toggle Debug ON";
 echo "------------------------------------------------------------------------------";
 echo "";
 sed -i "s:Debug = no:Debug = yes:I" /etc/MailScanner/MailScanner.conf
@@ -458,7 +458,7 @@ read -p "Press [Enter] to exit to menu..."
 else
 clear
 echo "------------------------------------------------------------------------------";
-echo "Toggle Dubug OFF";
+echo "Toggle Debug OFF";
 echo "------------------------------------------------------------------------------";
 echo "";
 sed -i "s:Debug = yes:Debug = no:I" /etc/MailScanner/MailScanner.conf
