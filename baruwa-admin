@@ -164,6 +164,7 @@ echo "--------------------------------------------------------------------------
 echo "Running Mail Queue.."
 echo ""; sleep 1
 exim -C /etc/exim/exim.conf -v -qff
+update_queuestats;
 echo "Completed!!!"
 sleep 2
 }
@@ -177,6 +178,7 @@ echo "--------------------------------------------------------------------------
 echo "Running Mail Queue.."
 echo ""; sleep 1
 exim -C /etc/exim/exim_out.conf -v -qff
+update_queuestats;
 echo "Completed!!!"
 sleep 2
 }
